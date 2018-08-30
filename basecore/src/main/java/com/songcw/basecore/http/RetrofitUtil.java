@@ -28,19 +28,22 @@ import retrofit2.converter.gson.GsonConverterFactory;
 /**
  * Created by Sprout on 2018/8/28
  */
-public class RetrofitFactory {
-    private static final String TAG = "okhttp";
+public class RetrofitUtil {
     private volatile static Retrofit retrofit;
 
-    public static Retrofit getInstance(String baseUrl) {
+    public static <T> T create(Class<T> clazz) {
+        return getInstance().create(clazz);
+    }
+
+    private static Retrofit getInstance() {
         if (retrofit == null) {
-            synchronized (RetrofitFactory.class) {
+            synchronized (RetrofitUtil.class) {
                 if (retrofit == null) {
                     retrofit = getRetrofit();
                 }
             }
         }
-        return RetrofitFactory.retrofit.newBuilder().baseUrl(baseUrl).build();
+        return RetrofitUtil.retrofit.newBuilder().baseUrl(PermanentInfoSP.baseUrl.getValue()).build();
     }
 
     private static Retrofit getRetrofit() {

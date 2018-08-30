@@ -1,4 +1,4 @@
-package com.songcw.basecore.entity;
+package com.songcw.base.home.http.entity;
 
 /**
  * Created by Sprout on 2018/8/29

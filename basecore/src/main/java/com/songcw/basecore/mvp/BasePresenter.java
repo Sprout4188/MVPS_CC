@@ -2,10 +2,7 @@ package com.songcw.basecore.mvp;
 
 import android.content.Context;
 
-import com.songcw.basecore.http.Api;
 import com.songcw.basecore.http.ICallBack;
-import com.songcw.basecore.http.RetrofitFactory;
-import com.songcw.basecore.sp.PermanentInfoSP;
 
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -30,10 +27,6 @@ public abstract class BasePresenter<V extends IController.IView> implements ICon
     public Context getContext() {
         if (mView != null) return ((BaseSection) mView).getContext();
         else throw new IllegalArgumentException(MSG_ERROR);
-    }
-
-    public Api getApi() {
-        return RetrofitFactory.getInstance(PermanentInfoSP.baseUrl.getValue()).create(Api.class);
     }
 
     public boolean isViewAttach() {
