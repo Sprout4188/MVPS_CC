@@ -1,0 +1,8 @@
+<resources>
+    <!--网络请求过程中的Loading, 如菊花圈-->
+    <style name="LoadingDialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>  //背景全透明
+    </style>
+</resources>
