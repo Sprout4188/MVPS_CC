@@ -21,7 +21,7 @@ public class UserInfoPresenter extends BasePresenter<UserInfoView> {
         addDisposable(RetrofitUtil.create(Api.User.class).captchaLogin(map), new ICallBack<UserInfoEntity>() {
             @Override
             public void onSuccess(UserInfoEntity entity) {
-                if (isViewAttach()) mView.getUserInfoSucc("");
+                if (isViewAttach()) mView.getUserInfoSucc(entity.getReject_reason());
             }
 
             @Override
