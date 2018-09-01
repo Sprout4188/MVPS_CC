@@ -1,6 +1,6 @@
 #MVPS
 
-一.描述
+# 一.描述
 
 本架构在传统的MVP模式上引入Section(切片)概念, 进一步解耦Activity和Fragment, 极大的降低了Activity和Fragment的冗余. 在传统MVP模式中, 通常代码是这样的:
 
@@ -42,7 +42,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
 
 ```
 
-	而在本架构中, 您的代码将是这样:
+而在本架构中, 您的代码将是这样:
 
 ```java
 public class MainActivity extends BaseActivity {
@@ -68,33 +68,33 @@ public class MainActivity extends BaseActivity {
 
 ```
 
-	更清爽, 更解耦, 专治代码强迫症<轻砖\*_\*>
+更清爽, 更解耦, 专治代码强迫症<轻砖\*_\*>
 
-二.技术栈
+# 二.技术栈
 
-> Rxjava+RxAndroid+Retrofit+OkHttp+Rxbus+Rxpermissions+Rxlifecycle+Rxbinding+Glide+Logger+Multidex
+Rxjava+RxAndroid+Retrofit+OkHttp+Rxbus+Rxpermissions+Rxlifecycle+Rxbinding+Glide+Logger+Multidex
 
-三.组件化方案
+# 三.组件化方案
 
-	CC传送门: [https://github.com/luckybilly/CC]
+CC传送门: [https://github.com/luckybilly/CC]
 
-四.架构原理
+# 四.架构原理
 
 ![MVPS](C:\Users\Sprout\Desktop\MVPS.png)
 
-	a.UI层持有Section池的引用, 将业务切片委托给相应Section去处理
+a.UI层持有Section池的引用, 将业务切片委托给相应Section去处理
 
-	b.Section持有Presenter的引用, 将具体的业务实现委托给Presenter处理
+b.Section持有Presenter的引用, 将具体的业务实现委托给Presenter处理
 
-	c.Presenter将处理结果回调给View, 因Section实现了View接口, 故结果实质是回调给了Section
+c.Presenter将处理结果回调给View, 因Section实现了View接口, 故结果实质是回调给了Section
 
-	d.Section拿到回调结果后, 去更新UI或者返回给组件调用方
+d.Section拿到回调结果后, 去更新UI或者返回给组件调用方
 
-五.使用示例
+# 五.使用示例
 
-	1.mvps使用
+ ## 1.mvps使用
 
-		a.Activity或Fragment中添加Section
+a.Activity或Fragment中添加Section
 
 ```java
 public class LoginActivity extends BaseActivity {
@@ -110,7 +110,7 @@ public class LoginActivity extends BaseActivity {
 }
 ```
 
-		b.Section中绑定Presenter, 实现View
+b.Section中绑定Presenter, 实现View
 
 ```java
 public class LoginSection extends BaseSection<LoginPresenter> implements LoginView {
@@ -156,18 +156,18 @@ public class LoginSection extends BaseSection<LoginPresenter> implements LoginVi
     public void onLoginSucc(UserInfoEntity userInfoEntity) {
         hideLoading();
         //将本组件处理的结果返回给调用方
-		CC.sendCCResult(ccCallId, CCResult.success("loginSucc", userInfoEntity));
+	CC.sendCCResult(ccCallId, CCResult.success("loginSucc", userInfoEntity));
     }
 
     @Override
     public void onLoginFail(String error) {
         hideLoading();
-		CC.sendCCResult(ccCallId, CCResult.error("loginFail", error));
+	CC.sendCCResult(ccCallId, CCResult.error("loginFail", error));
     }
 }
 ```
 
-		c.Presenter中处理业务逻辑(如请求接口), 并将处理结果回调给View
+c.Presenter中处理业务逻辑(如请求接口), 并将处理结果回调给View
 
 ```java
 public class LoginPresenter extends BasePresenter<LoginView> {
@@ -191,7 +191,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 }
 ```
 
-		d.在View中定义回调接口
+d.在View中定义回调接口
 
 ```java
 public interface LoginView extends IController.IView{
@@ -204,9 +204,9 @@ public interface LoginView extends IController.IView{
 
 
 
-	2.cc组件间通讯
+ ## 2.cc组件间通讯
 
-		a.调用组件
+a.调用组件
 
 ```java
 CC.obtainBuilder("ComponentLogin")
@@ -225,7 +225,7 @@ CC.obtainBuilder("ComponentLogin")
 });
 ```
 
-		b.组件接收
+b.组件接收
 
 ```java
 public class ComponentLogin implements IComponent {
