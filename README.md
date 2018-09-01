@@ -2,7 +2,7 @@
 
 一.描述
 
-	本架构在传统的MVP模式上引入Section(切片)概念, 进一步解耦Activity和Fragment, 极大的降低了Activity和Fragment的冗余. 在传统MVP模式中, 通常代码是这样的:
+本架构在传统的MVP模式上引入Section(切片)概念, 进一步解耦Activity和Fragment, 极大的降低了Activity和Fragment的冗余. 在传统MVP模式中, 通常代码是这样的:
 
 ```java
 public class MainActivity extends BaseActivity<MainPresenter> implements MainView {
