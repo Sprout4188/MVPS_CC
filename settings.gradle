@@ -1,1 +1,1 @@
-include ':app', ':basecore', ':functioncore'
+include ':app', ':basecore', ':component.login', ':model'

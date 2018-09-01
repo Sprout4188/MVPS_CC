@@ -5,12 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.view.View;
 
-import com.songcw.basecore.lifecycle.ButterKnifeLifecycle;
 import com.songcw.basecore.lifecycle.ILifecycle;
 import com.songcw.basecore.lifecycle.LifecycleManager;
 import com.songcw.basecore.lifecycle.RxBusLifecycle;
@@ -68,6 +68,11 @@ public abstract class BaseSection<P extends IController.IPresenter> implements I
 
     public abstract P onCreatePresenter();
 
+    public View findView(@IdRes int id) {
+        if (decorView != null) return decorView.findViewById(id);
+        else throw new IllegalArgumentException(MSG_SOURCE);
+    }
+
     /**
      * 添加生命周期管理
      */
@@ -94,17 +99,27 @@ public abstract class BaseSection<P extends IController.IPresenter> implements I
      * 默认添加ButterKnife和RxBus生命周期
      */
     public void addDefaultLifecycle() {
-        addLifecycle(new ButterKnifeLifecycle(this));
         addLifecycle(new RxBusLifecycle(this));
     }
 
     public void onCreate(@Nullable Bundle savedInstanceState) {
         manager.onCreate();
+        if (source instanceof Activity) {
+            initViews();
+            initEvents();
+        }
     }
 
     public void onViewCreated(View view, Bundle state) {
-
+        if (source instanceof Fragment || source instanceof android.app.Fragment) {
+            initViews();
+            initEvents();
+        }
     }
+
+    protected abstract void initEvents();
+
+    protected abstract void initViews();
 
     public void onRestart() {
         manager.onShow();

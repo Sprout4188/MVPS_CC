@@ -42,12 +42,16 @@ public class ConfigSection extends BaseSection {
     }
 
     @Override
-    public void onStart() {
-        super.onStart();
+    protected void initViews() {
         rgConfig = (RadioGroup) getDecorView().findViewById(R.id.rg_config);
         etConfigPwd = (EditText) getDecorView().findViewById(R.id.et_config_pwd);
+    }
+
+    @Override
+    protected void initEvents() {
         registerRadioGroupListener();
         registerPwdListener();
+
     }
 
     private void registerRadioGroupListener() {

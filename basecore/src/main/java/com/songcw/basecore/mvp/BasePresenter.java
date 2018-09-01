@@ -24,6 +24,7 @@ public abstract class BasePresenter<V extends IController.IView> implements ICon
         }
     }
 
+
     public Context getContext() {
         if (mView != null) return ((BaseSection) mView).getContext();
         else throw new IllegalArgumentException(MSG_ERROR);

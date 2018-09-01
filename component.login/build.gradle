@@ -1,8 +1,11 @@
-apply plugin: 'com.android.library'
+apply from: 'https://raw.githubusercontent.com/luckybilly/CC/master/cc-settings.gradle'
 
 android {
     compileSdkVersion rootProject.ext.android["compileSdkVersion"]
     defaultConfig {
+        if (project.ext.runAsApp) {
+            applicationId rootProject.ext.android["applicationId"]
+        }
         minSdkVersion rootProject.ext.android["minSdkVersion"]
         targetSdkVersion rootProject.ext.android["targetSdkVersion"]
         versionCode rootProject.ext.android["versionCode"]
@@ -20,4 +23,5 @@ android {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api project(':basecore')
+    api project(':model')
 }

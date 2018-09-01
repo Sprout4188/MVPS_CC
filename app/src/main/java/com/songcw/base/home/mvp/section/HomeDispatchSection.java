@@ -4,17 +4,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
+import com.billy.cc.core.component.CC;
+import com.billy.cc.core.component.CCResult;
+import com.billy.cc.core.component.IComponentCallback;
 import com.songcw.base.R;
-import com.songcw.base.home.activity.NetSimpleActivity;
 import com.songcw.basecore.mvp.BaseSection;
 import com.songcw.basecore.mvp.IController;
-
-import butterknife.OnClick;
+import com.songcw.model.UserInfoEntity;
 
 /**
  * Created by Sprout on 2018/8/30
  */
-public class HomeDispatchSection extends BaseSection {
+public class HomeDispatchSection extends BaseSection implements View.OnClickListener {
+
+    private View btNet;
+
     public HomeDispatchSection(Object source) {
         super(source);
     }
@@ -24,11 +28,39 @@ public class HomeDispatchSection extends BaseSection {
         return null;
     }
 
-    @OnClick({R.id.btTestNet, R.id.bt_im, R.id.btCapture, R.id.btSelect, R.id.bt_meglive, R.id.bt_megocr})
-    public void click(View view) {
+    @Override
+    protected void initViews() {
+        btNet = findView(R.id.btTestNet);
+    }
+
+    @Override
+    protected void initEvents() {
+        btNet.setOnClickListener(this);
+    }
+
+    public void go(Context from, Class to) {
+        Intent intent = new Intent();
+        intent.setClass(from, to);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btTestNet:            //请求网络示例
-                go(getContext(), NetSimpleActivity.class);
+                CC.obtainBuilder("ComponentLogin")
+                        .setContext(getContext())
+                        .build()
+                        .callAsync(new IComponentCallback() {
+                            @Override
+                            public void onResult(CC cc, CCResult result) {
+                                if (result.getCode() == CCResult.CODE_SUCCESS) {
+                                    UserInfoEntity loginResult = result.getDataItem("loginSucc");
+                                } else {
+                                    String errorMsg = result.getDataItem("loginFail");
+                                }
+                            }
+                        });
                 break;
             case R.id.bt_im:                //融云IM示例
 //                go(getActivity(), ImSimpleActivity.class);
@@ -46,11 +78,5 @@ public class HomeDispatchSection extends BaseSection {
 //                go(getActivity(), MegOcrLoadingActivity.class);
                 break;
         }
-    }
-
-    public void go(Context from, Class to) {
-        Intent intent = new Intent();
-        intent.setClass(from, to);
-        startActivity(intent);
     }
 }

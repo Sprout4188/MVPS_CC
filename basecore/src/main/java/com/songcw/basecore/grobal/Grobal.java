@@ -17,7 +17,8 @@ public class Grobal {
     }
 
     public static class Http {
-        public static String Url_Dev = "http://192.168.31.113:3000";          //开发环境根地址
+//        public static String Url_Dev = "http://192.168.31.113:3000";          //开发环境根地址
+        public static String Url_Dev = "http://192.168.2.124:3000";          //开发环境根地址
         public static String Url_Sit = "https://openapi-test.songchedai.com"; //测试环境根地址
         public static String Url_Pro = "https://v200-openapi.songchedai.com"; //生产环境根地址
 

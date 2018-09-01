@@ -14,7 +14,6 @@ import com.songcw.basecore.mvp.BaseSection;
 import java.util.ArrayList;
 import java.util.List;
 
-import butterknife.BindView;
 import devlight.io.library.ntb.NavigationTabBar;
 
 /**
@@ -22,9 +21,7 @@ import devlight.io.library.ntb.NavigationTabBar;
  * 底部导航栏切片
  */
 public class BottomNavigationTabSection extends BaseSection<BottomNavigationTabPresenter> {
-    @BindView(R.id.vp_main)
     ViewPager vpMain;
-    @BindView(R.id.ntb_main)
     NavigationTabBar ntbMain;
 
     public BottomNavigationTabSection(Object source) {
@@ -42,10 +39,21 @@ public class BottomNavigationTabSection extends BaseSection<BottomNavigationTabP
         initUI();
     }
 
+    @Override
+    protected void initViews() {
+        vpMain = (ViewPager) findView(R.id.vp_main);
+        ntbMain = (NavigationTabBar) findView(R.id.ntb_main);
+    }
+
+    @Override
+    protected void initEvents() {
+
+    }
+
     public void initUI() {
         List<BaseFragment> fragments = mPresenter.getMainViewPagerFragments();
         vpMain.setOffscreenPageLimit(5);
-        vpMain.setAdapter(new MainViewPagerAdapter(((BaseActivity)getContext()).getSupportFragmentManager(), fragments));
+        vpMain.setAdapter(new MainViewPagerAdapter(((BaseActivity) getContext()).getSupportFragmentManager(), fragments));
         ArrayList<NavigationTabBar.Model> models = mPresenter.getModels();
         ntbMain.setModels(models);
         ntbMain.setViewPager(vpMain, 0);
