@@ -202,7 +202,7 @@ public interface LoginView extends IController.IView{
 
 
 
- ### 2.cc组件间通讯
+ ### 2.CC组件间通讯
 
 a.调用组件
 
