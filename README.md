@@ -78,7 +78,7 @@ CC传送门: [https://github.com/luckybilly/CC]
 
 ## 四.架构原理
 
-![MVPS](C:\Users\Sprout\Desktop\MVPS.png)
+![MVPS](https://raw.githubusercontent.com/Sprout4188/MVPS/master_cc/images/MVPS.png)
 
 a.UI层持有Section池的引用, 将业务切片委托给相应Section去处理
 
