@@ -8,7 +8,7 @@ import java.util.Map;
 /**
  * Created by Sprout on 2018/8/29
  */
-public class Grobal {
+public class Config {
 
     public static class Logger {
         public static String Base_Tag = "songcw";           //Log日志的全局TAG

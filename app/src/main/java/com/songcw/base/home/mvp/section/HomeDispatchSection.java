@@ -1,13 +1,12 @@
 package com.songcw.base.home.mvp.section;
 
-import android.content.Context;
-import android.content.Intent;
 import android.view.View;
 
 import com.billy.cc.core.component.CC;
 import com.billy.cc.core.component.CCResult;
 import com.billy.cc.core.component.IComponentCallback;
 import com.songcw.base.R;
+import com.songcw.basecore.grobal.Constant;
 import com.songcw.basecore.mvp.BaseSection;
 import com.songcw.basecore.mvp.IController;
 import com.songcw.model.UserInfoEntity;
@@ -38,18 +37,13 @@ public class HomeDispatchSection extends BaseSection implements View.OnClickList
         btNet.setOnClickListener(this);
     }
 
-    public void go(Context from, Class to) {
-        Intent intent = new Intent();
-        intent.setClass(from, to);
-        startActivity(intent);
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btTestNet:            //请求网络示例
                 CC.obtainBuilder("ComponentLogin")
                         .setContext(getContext())
+                        .setActionName(Constant.action.ALogin)
                         .build()
                         .callAsync(new IComponentCallback() {
                             @Override
@@ -57,6 +51,7 @@ public class HomeDispatchSection extends BaseSection implements View.OnClickList
                                 if (result.getCode() == CCResult.CODE_SUCCESS) {
                                     UserInfoEntity loginResult = result.getDataItem("loginSucc");
                                 } else {
+
                                     String errorMsg = result.getDataItem("loginFail");
                                 }
                             }

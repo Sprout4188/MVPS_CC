@@ -1,6 +1,6 @@
 package com.songcw.basecore.http;
 
-import com.songcw.basecore.grobal.Grobal;
+import com.songcw.basecore.grobal.Config;
 import com.songcw.basecore.sp.PermanentInfoSP;
 
 import java.io.IOException;
@@ -69,9 +69,9 @@ public class RetrofitUtil {
         OkHttpClient okHttpClient = builder
                 .addInterceptor(new AddHeaderInterceptor())
                 .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-                .connectTimeout(Grobal.Http.ConnectTimeout, TimeUnit.SECONDS)
-                .readTimeout(Grobal.Http.ReadTimeout, TimeUnit.SECONDS)
-                .writeTimeout(Grobal.Http.WriteTimeout, TimeUnit.SECONDS)
+                .connectTimeout(Config.Http.ConnectTimeout, TimeUnit.SECONDS)
+                .readTimeout(Config.Http.ReadTimeout, TimeUnit.SECONDS)
+                .writeTimeout(Config.Http.WriteTimeout, TimeUnit.SECONDS)
                 .build();
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(PermanentInfoSP.baseUrl.getValue())
@@ -104,7 +104,7 @@ public class RetrofitUtil {
         public Response intercept(Chain chain) throws IOException {
             Request original = chain.request();
             Request.Builder builder = original.newBuilder();
-            Map<String, String> header = Grobal.Http.buildHeader();   //添加公共Header
+            Map<String, String> header = Config.Http.buildHeader();   //添加公共Header
             for (Map.Entry<String, String> entry : header.entrySet()) {
                 builder.addHeader(entry.getKey(), entry.getValue());
             }

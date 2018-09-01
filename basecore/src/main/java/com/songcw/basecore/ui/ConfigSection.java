@@ -8,7 +8,7 @@ import android.widget.RadioGroup;
 import com.github.florent37.viewanimator.ViewAnimator;
 import com.jakewharton.rxbinding2.widget.RxTextView;
 import com.songcw.basecore.R;
-import com.songcw.basecore.grobal.Grobal;
+import com.songcw.basecore.grobal.Config;
 import com.songcw.basecore.mvp.BaseSection;
 import com.songcw.basecore.mvp.IController;
 import com.songcw.basecore.sp.PermanentInfoSP;
@@ -59,11 +59,11 @@ public class ConfigSection extends BaseSection {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 if (checkedId == R.id.rg_dev) { //开发环境
-                    baseUrl = Grobal.Http.Url_Dev;
+                    baseUrl = Config.Http.Url_Dev;
                 } else if (checkedId == R.id.rg_sit) { //测试环境
-                    baseUrl = Grobal.Http.Url_Sit;
+                    baseUrl = Config.Http.Url_Sit;
                 } else if (checkedId == R.id.rg_pro) { //生产环境
-                    baseUrl = Grobal.Http.Url_Pro;
+                    baseUrl = Config.Http.Url_Pro;
                 }
             }
         });

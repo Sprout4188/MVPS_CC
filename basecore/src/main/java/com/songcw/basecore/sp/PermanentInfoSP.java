@@ -1,6 +1,6 @@
 package com.songcw.basecore.sp;
 
-import com.songcw.basecore.grobal.Grobal;
+import com.songcw.basecore.grobal.Config;
 import com.songcw.basecore.sp.items.BooleanPrefItem;
 import com.songcw.basecore.sp.items.StringPrefItem;
 
@@ -18,7 +18,7 @@ public class PermanentInfoSP extends BaseSP {
     /**
      * 普通接口根地址
      */
-    public static final StringPrefItem baseUrl = new StringPrefItem(instance, "baseUrl", Grobal.Http.Url_Sit);
+    public static final StringPrefItem baseUrl = new StringPrefItem(instance, "baseUrl", Config.Http.Url_Sit);
 
     /**
      * 是否首次安装本APP

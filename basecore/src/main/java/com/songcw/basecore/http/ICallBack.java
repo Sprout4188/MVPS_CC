@@ -1,6 +1,6 @@
 package com.songcw.basecore.http;
 
-import com.songcw.basecore.grobal.Grobal;
+import com.songcw.basecore.grobal.Config;
 
 import java.net.ConnectException;
 import java.net.SocketTimeoutException;
@@ -20,7 +20,7 @@ public abstract class ICallBack<T> extends DisposableObserver<BaseResponse<T>> {
 
     @Override
     public void onNext(BaseResponse<T> response) {
-        if (Grobal.Http.Code_Succ.equals(response.getCode())) {
+        if (Config.Http.Code_Succ.equals(response.getCode())) {
             onSuccess(response.getResult());
         } else {
             onFail(response.getMsg());
