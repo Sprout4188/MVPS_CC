@@ -213,14 +213,14 @@ CC.obtainBuilder("ComponentLogin")
   	.build()
   	.callAsync(new IComponentCallback() {
   		@Override
-    	public void onResult(CC cc, CCResult result) {
-    		if (result.getCode() == CCResult.CODE_SUCCESS) {
-            	UserInfoEntity loginResult = result.getDataItem("loginSucc");
-            } else {
-                String errorMsg = result.getDataItem("loginFail");
-            }
-       	}
-});
+    		public void onResult(CC cc, CCResult result) {
+    			if (result.getCode() == CCResult.CODE_SUCCESS) {
+            			UserInfoEntity loginResult = result.getDataItem("loginSucc");
+            		} else {
+                		String errorMsg = result.getDataItem("loginFail");
+            		}
+       		}
+	});
 ```
 
 b.组件接收
