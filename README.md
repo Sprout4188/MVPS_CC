@@ -10,7 +10,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     protected MainPresenter createPresenter() {
         return new MainPresenter();
     }
-
+    
     @Override
     protected int setContentLayout() {
         return R.layout.activity_main;
@@ -20,21 +20,21 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainVie
     protected void initView() {
         super.initView();
         ViewPager viewPager = (ViewPager) findViewById(R.id.view_pager);
-        ...
+        ...        
         mPresenter.getBannerList();	//获取Banner列表
         ...
         mPresent.getHotBrand();		//获取热门品牌
         ...
     }
-
+    
     public void onBannerSucc(List<Banner> list) {
         //更新Banner相关界面
     }
-
+    
     public void onHotBrandSucc(List<Brand> list) {
         //更新热门品牌相关界面
     }
-
+    
     public void onFail(String errorMsg) {
         //Toast
     }
@@ -195,7 +195,7 @@ public class LoginPresenter extends BasePresenter<LoginView> {
 
 ```java
 public interface LoginView extends IController.IView{
-
+    
     void onLoginSucc(UserInfoEntity userInfoEntity);
 
     void onLoginFail(String error);
